@@ -64,29 +64,6 @@ x, y = clean_data(ds)
 ### YOUR CODE HERE ###a
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.30, shuffle=True)
 
-termination_policy = BanditPolicy(slack_factor=0.02, evaluation_interval=1, delay_evaluation=2)
-
-param_sampling = RandomParameterSampling({
-    "C": uniform(0.3, 1.0)
-})
-
-from azureml.core.compute import ComputeTarget, AmlCompute
-
-AmlCompute()
-
-# Create the estimator
-est  = Estimator(source_directory='.',
-                  entry_script='train.R',
-                  compute_target=compute_target)
-
-config = HyperDriveConfig(estimator=est,
-                          hyperparameter_sampling=param_sampling,
-                          policy=termination_policy,
-                          primary_metric_name='validation_acc',
-                          primary_metric_goal=PrimaryMetricGoal.MAXIMIZE,
-                          max_total_runs=4,
-                          max_concurrent_runs=4)
-
 run = Run.get_context()
 
 
