@@ -1,3 +1,4 @@
+from azureml.train.estimator import Estimator
 from sklearn.linear_model import LogisticRegression
 import argparse
 import os
@@ -9,25 +10,29 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 from azureml.core.run import Run
 from azureml.data.dataset_factory import TabularDatasetFactory
+from azureml.train.hyperdrive import HyperDriveConfig, EarlyTerminationPolicy, RandomParameterSampling, uniform, \
+    BanditPolicy, PrimaryMetricGoal
 
 # TODO: Create TabularDataset using TabularDatasetFactory
 # Data is located at:
-# "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
+path = "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
 
-ds = ### YOUR CODE HERE ###
+ds = TabularDatasetFactory.from_delimited_files(path,
+                                                validate=True,
+                                                include_path=False,
+                                                infer_column_types=True,
+                                                separator=',',
+                                                header=True,
+                                                support_multi_line=False,
+                                                empty_as_string=False,
+                                                encoding='utf8')
 
-x, y = clean_data(ds)
-
-# TODO: Split data into train and test sets.
-
-### YOUR CODE HERE ###a
-
-run = Run.get_context()
 
 def clean_data(data):
     # Dict for cleaning data
-    months = {"jan":1, "feb":2, "mar":3, "apr":4, "may":5, "jun":6, "jul":7, "aug":8, "sep":9, "oct":10, "nov":11, "dec":12}
-    weekdays = {"mon":1, "tue":2, "wed":3, "thu":4, "fri":5, "sat":6, "sun":7}
+    months = {"jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6, "jul": 7, "aug": 8, "sep": 9, "oct": 10,
+              "nov": 11, "dec": 12}
+    weekdays = {"mon": 1, "tue": 2, "wed": 3, "thu": 4, "fri": 5, "sat": 6, "sun": 7}
 
     # Clean and one hot encode data
     x_df = data.to_pandas_dataframe().dropna()
@@ -49,13 +54,48 @@ def clean_data(data):
     x_df["poutcome"] = x_df.poutcome.apply(lambda s: 1 if s == "success" else 0)
 
     y_df = x_df.pop("y").apply(lambda s: 1 if s == "yes" else 0)
-    
+
+    return x_df.values, y_df.values
+
+
+x, y = clean_data(ds)
+
+# TODO: Split data into train and test sets.
+### YOUR CODE HERE ###a
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.30, shuffle=True)
+
+termination_policy = BanditPolicy(slack_factor=0.02, evaluation_interval=1, delay_evaluation=2)
+
+param_sampling = RandomParameterSampling({
+    "C": uniform(0.3, 1.0)
+})
+
+from azureml.core.compute import ComputeTarget, AmlCompute
+
+AmlCompute()
+
+# Create the estimator
+est  = Estimator(source_directory='.',
+                  entry_script='train.R',
+                  compute_target=compute_target)
+
+config = HyperDriveConfig(estimator=est,
+                          hyperparameter_sampling=param_sampling,
+                          policy=termination_policy,
+                          primary_metric_name='validation_acc',
+                          primary_metric_goal=PrimaryMetricGoal.MAXIMIZE,
+                          max_total_runs=4,
+                          max_concurrent_runs=4)
+
+run = Run.get_context()
+
 
 def main():
     # Add arguments to script
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--C', type=float, default=1.0, help="Inverse of regularization strength. Smaller values cause stronger regularization")
+    parser.add_argument('--C', type=float, default=1.0,
+                        help="Inverse of regularization strength. Smaller values cause stronger regularization")
     parser.add_argument('--max_iter', type=int, default=100, help="Maximum number of iterations to converge")
 
     args = parser.parse_args()
@@ -67,6 +107,7 @@ def main():
 
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
+
 
 if __name__ == '__main__':
     main()
