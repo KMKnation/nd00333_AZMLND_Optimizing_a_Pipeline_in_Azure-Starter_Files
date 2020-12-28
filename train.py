@@ -1,4 +1,3 @@
-from azureml.train.estimator import Estimator
 from sklearn.linear_model import LogisticRegression
 import argparse
 import os
@@ -10,8 +9,6 @@ from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 from azureml.core.run import Run
 from azureml.data.dataset_factory import TabularDatasetFactory
-from azureml.train.hyperdrive import HyperDriveConfig, EarlyTerminationPolicy, RandomParameterSampling, uniform, \
-    BanditPolicy, PrimaryMetricGoal
 
 # TODO: Create TabularDataset using TabularDatasetFactory
 # Data is located at:
