@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="660055c3-a186-42ca-86b4-e53ef4e17646" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auto_ml_cm.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/images/auto_ml_cm.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auto_ml_result.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/images/auto_ml_result.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/automl_result.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/images/automl_result.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/final_hyper_drive_models.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/images/final_hyper_drive_models.PNG" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -202,7 +205,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
