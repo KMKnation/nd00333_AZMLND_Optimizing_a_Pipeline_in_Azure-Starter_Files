@@ -21,8 +21,7 @@ ds = TabularDatasetFactory.from_delimited_files(path,
                                                 separator=',',
                                                 header=True,
                                                 support_multi_line=False,
-                                                empty_as_string=False,
-                                                encoding='utf8')
+                                                empty_as_string=False)
 
 
 def clean_data(data):
@@ -52,7 +51,7 @@ def clean_data(data):
 
     y_df = x_df.pop("y").apply(lambda s: 1 if s == "yes" else 0)
 
-    return x_df.values, y_df.values
+    return x_df, y_df
 
 
 x, y = clean_data(ds)
@@ -78,6 +77,9 @@ def main():
     run.log("Max iterations:", np.int(args.max_iter))
 
     model = LogisticRegression(C=args.C, max_iter=args.max_iter).fit(x_train, y_train)
+
+    os.makedirs('outputs',exist_ok = True)
+    joblib.dump(model,'outputs/model.joblib')
 
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
