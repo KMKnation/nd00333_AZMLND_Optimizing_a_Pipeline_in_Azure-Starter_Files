@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="660055c3-a186-42ca-86b4-e53ef4e17646" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/images/automl_pipeline.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/scikit-learn-pipeline.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hyper_drive_run.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/images/metrics.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/udacity-project.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/udacity-project.ipynb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +25,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="243">
-                <caret line="61" column="4" lean-forward="true" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="4" />
+              <first_editor relative-caret-position="513">
+                <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
               </first_editor>
               <second_editor />
             </state>
@@ -329,8 +324,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="243">
-            <caret line="61" column="4" lean-forward="true" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="4" />
+          <first_editor relative-caret-position="513">
+            <caret line="94" lean-forward="true" selection-start-line="94" selection-end-line="94" />
           </first_editor>
           <second_editor />
         </state>
