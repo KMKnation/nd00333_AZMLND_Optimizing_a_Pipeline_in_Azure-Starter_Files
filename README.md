@@ -11,11 +11,11 @@ We had a bank marketing data which contains around <b>32950</b> observations and
 
 The main work for me here is to provide a solution which works best for this problem statement with the use of AzureML.
 
-We have trained a <b>LogisticRegression</b> algorithm of Scikit-learn that has two hyperparams which can impact on the result of the model's performance. Hence, we used hyperdrive config method of AzureML to get which hyperparams works best for us.
+We have trained a <b>LogisticRegression</b> algorithm of Scikit-learn that has two hyperparams that can impact on the result of the model's performance. Thus, we used hyperdrive config method of AzureML to get what hyperparams works best for us.
 
-Also, we are not limited by using the LogisticRegression only. We have to explore diffrent alogorithms as well. To do that like one by one, it would take so much time and resource. Hence we used <b>AutoML</b> of AzureML to get best performing model for our problem.
+Also, we are not limited by using the LogisticRegression only. We also have to explore diffrent alogorithms. To do that like one by one, it would take so much time, resource and computational power. Hence we used <b>AutoML</b> of AzureML to get best performing model for our problem statement.
 
-Finally, By comparing all the results, we came to conclusion that <b>VotingEnsemble</b> algorithm works best for our problem statement compared to other algorithms.
+Finally, By comparing all the results, we came to conclusion that <b>VotingEnsemble</b> algorithm works best for our problem statement with <b>91.70%</b> accuracy compared to other algorithms.
 
 
 ## Scikit-learn Pipeline
