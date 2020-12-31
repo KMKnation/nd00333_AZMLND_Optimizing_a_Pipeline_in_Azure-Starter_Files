@@ -6,11 +6,57 @@ In this project, we build and optimize an Azure ML pipeline using the Python SDK
 This model is then compared to an Azure AutoML run.
 
 ## Summary
-**In 1-2 sentences, explain the problem statement: e.g "This dataset contains data about... we seek to predict..."**
 
-**In 1-2 sentences, explain the solution: e.g. "The best performing model was a ..."**
+We had a bank marketing data which contains around <b>32950</b> observations and <b>21</b> features with one target variable <b>"y"</b> which we think it as a indicator for that customer lead gets interested or not.
+
+The main work for me here is to provide a solution which works best for this problem statement with the use of AzureML.
+
+We have trained a <b>LogisticRegression</b> algorithm of Scikit-learn that has two hyperparams which can impact on the result of the model's performance. Hence, we used hyperdrive config method of AzureML to get which hyperparams works best for us.
+
+Also, we are not limited by using the LogisticRegression only. We have to explore diffrent alogorithms as well. To do that like one by one, it would take so much time and resource. Hence we used <b>AutoML</b> of AzureML to get best performing model for our problem.
+
+Finally, By comparing all the results, we came to conclusion that <b>VotingEnsemble</b> algorithm works best for our problem statement compared to other algorithms.
+
 
 ## Scikit-learn Pipeline
+
+- Architecture
+
+    ![Architecture](./images/scikit-learn-pipeline.jpg)
+    
+    As shown in above diagram, There mainly 5 points to look
+    1. Prepared Dataset
+       
+       We have to create one method for preparing the dataset which should do all the pre-processing on dataset such as feature-engineering, null value handling etc.
+    2. Selected scikit-learn algo to train
+       
+       After the completing the prepare-dataset method, we have to select the algorithm  on which we want to train the prepared dataset, Here, we used the LogisticRegression algorithm from scikit-learn.
+    3. Using Hyperdrive to choose the ideal hyper-params
+    
+        After creating one training script. In which, we are feeeding the prepared tabular dataset to the LogisticRegression algorithm. We have created the script in a such a way that, the hyper-params can be controlled from the outside.
+                
+            python train.py --C 0.5 --max_iter 60 
+            
+            Here C and max_iter are the hyper-params
+                
+        We have to choose which hyper-param to optimize and for which concerned  metric parameter such as rmse, accuracy etc.
+        
+    4. Get the best optimized model
+        
+        After doing the primary configuration of the hyperdrive config, we started the HyperDrive by submitting the hyperdrive configuration for an experiment in Azure Workspace. At the end, we get the best model which is 91.6% accuracy one LogisticRegression algo from the hyperdrive experiment run.
+        ![hyper-drive-output](./images/hyper_drive_output.png)        
+    5. Research Report
+        
+        After few minutes, we will have detailed report consisting plots and results of comparision of diffrent hyperparams used to achieve the target primary metric.
+        
+         ![hyper-drive-report](./images/metrics.PNG)
+    
+    
+       
+    
+   The main point of this pipeline is to get the ideal hyper-params of model so that time and efforts of the ML engineer could be saved.
+
+
 **Explain the pipeline architecture, including data, hyperparameter tuning, and classification algorithm.**
 
 **What are the benefits of the parameter sampler you chose?**
