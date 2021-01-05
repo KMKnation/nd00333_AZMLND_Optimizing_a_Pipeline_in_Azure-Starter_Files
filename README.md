@@ -74,22 +74,39 @@ Finally, By comparing all the results, we came to conclusion that <b>VotingEnsem
   As shown in above code snippet, we have specified experiment timeout minutes 30, type of algo should be a classification and the target primary metric = "accuracy".
   
   After the completion of AutoML, we got the best model as a "<b>VotingEnsemble</b>" algorithm with the <b>91.70%</b> accuracy. The model hyper-params used for VotingEnsemble are  min_samples_leaf = 0.01, min_samples_split=0.01, min_weight_fraction_leaf=0.0, n_estimators=10 and n_jobs=1.
+  
+  The other metrics we got other than accuracy are as below.
+  
  
 
 ## Pipeline comparison
 
 
-
 Key | Hyperdrive Pipeline | AutoML Pipeline
 | ------------- | ------------- | ------------- 
 Architecture | ![!hyperdrive](./images/scikit-learn-pipeline.jpg) | ![!hyperdrive](./images/automl_pipeline.jpg)
-Accuracy | LogisticRegression with 91.59% | VotingEnsemble with 91.70%
+Accuracy | LogisticRegression with 91.47% | VotingEnsemble with 91.66%
+Duration | 18.3 minute | 33.2 minute
+Compute Target | compute cluster | local
+Confusion Matrix | Not Available | Available
+Explanations | Not Available | Available
 
 As shown in diagram, the main diffrence between two pipeline is the flexibility of AutoML. The Hyperdrive only focuses on the specific algorithm's hyper-params whether the AutoML uses all the range of algorithms for target task and provide the best working algorithm.
+
+However some visible diffrences between HyperDriver and AutoML are as below.
+- Keeping the time in mind, the duration taken by AutoML is more than the duration taken by HyperDrive.
+- Metrics provided by the AutoML are clean and explainable by diffrent metrics but in HyperDrive, we have limited options to compare model by diffrent matrix
+
+
 Thus, we should use AutoML when we required lots of computation power and resources and we should use the HyperDrive when we have our algorithm but not the best hyperparams for it.
 
 ## Future work
 
-- Scalability in HyperDrive like we don't have to dependent on algorithm just the hyperparameters.
-- Converting the saved model directly to the desired format. Such as ONNX, TFLITE etc.
+1. Scalability in HyperDrive like we don't have to dependent on algorithm just the hyperparameters.
+   
+   - Lets say that we have our training scripts are ready for any machine learning or deep learning algorithm and we have to just pass the hyperparams to that training script and thats it. It will give you the best hyperparams for your training script. 
+    
+2. Converting the saved model directly to the desired format. Such as ONNX, TFLITE etc.
 
+   - Right now, There is one need of converting the model into platform supported format.
+   For Example, Android App Developer needs ".tflite" models, iOS Application Developer needs ".coreml" model, Edge Devices needs "OpenVino supported binary files". Thus, the ML engineer have to do so much work to export the supported model for each mode 
