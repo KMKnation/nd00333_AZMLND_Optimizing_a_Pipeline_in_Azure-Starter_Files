@@ -15,7 +15,7 @@ We have trained a <b>LogisticRegression</b> algorithm of Scikit-learn that has t
 
 Also, we are not limited by using the LogisticRegression only. We also have to explore diffrent alogorithms. To do that like one by one, it would take so much time, resource and computational power. Hence we used <b>AutoML</b> of AzureML to get best performing model for our problem statement.
 
-Finally, By comparing all the results, we came to conclusion that <b>VotingEnsemble</b> algorithm works best for our problem statement with <b>91.70%</b> accuracy compared to other algorithms.
+Finally, By comparing all the results, we came to conclusion that <b>VotingEnsemble</b> algorithm works best for our problem statement with <b>91.66%</b> accuracy compared to other algorithms.
 
 
 ## Scikit-learn Pipeline
@@ -73,9 +73,33 @@ Finally, By comparing all the results, we came to conclusion that <b>VotingEnsem
 
   As shown in above code snippet, we have specified experiment timeout minutes 30, type of algo should be a classification and the target primary metric = "accuracy".
   
-  After the completion of AutoML, we got the best model as a "<b>VotingEnsemble</b>" algorithm with the <b>91.70%</b> accuracy. The model hyper-params used for VotingEnsemble are  min_samples_leaf = 0.01, min_samples_split=0.01, min_weight_fraction_leaf=0.0, n_estimators=10 and n_jobs=1.
+  After the completion of AutoML, we got the best model as a "<b>VotingEnsemble</b>" algorithm with the <b>91.66%</b> accuracy. The model hyper-params used for VotingEnsemble are  min_samples_leaf = 0.01, min_samples_split=0.01, min_weight_fraction_leaf=0.0, n_estimators=10 and n_jobs=1.
   
   The other metrics we got other than accuracy are as below.
+
+Metric | Value | 
+ | ------------- | ------------- 
+Accuracy | 0.91660
+AUC macro | 0.94837
+AUC micro | 0.98101
+AUC weighted | 0.94837
+Average precision score macro | 0.82818
+Average precision score micro | 0.98180
+Average precision score weighted | 0.95642
+Balanced accuracy | 0.74865
+F1 score macro | 0.77087
+F1 score micro | 0.91660
+F1 score weighted | 0.91271
+Log loss | 0.18756
+Matthews correlation | 0.54640
+Norm macro recall | 0.49731
+Precision score macro | 0.80035
+Precision score micro | 0.91660
+Precision score weighted | 0.91070
+Recall score macro | 0.74865
+Recall score micro | 0.91660
+Recall score weighted | 0.91660
+Weighted accuracy | 0.95830
   
  
 
