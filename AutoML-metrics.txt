@@ -1,0 +1,42 @@
+Accuracy
+0.91660
+AUC macro
+0.94837
+AUC micro
+0.98101
+AUC weighted
+0.94837
+Average precision score macro
+0.82818
+Average precision score micro
+0.98180
+Average precision score weighted
+0.95642
+Balanced accuracy
+0.74865
+F1 score macro
+0.77087
+F1 score micro
+0.91660
+F1 score weighted
+0.91271
+Log loss
+0.18756
+Matthews correlation
+0.54640
+Norm macro recall
+0.49731
+Precision score macro
+0.80035
+Precision score micro
+0.91660
+Precision score weighted
+0.91070
+Recall score macro
+0.74865
+Recall score micro
+0.91660
+Recall score weighted
+0.91660
+Weighted accuracy
+0.95830
